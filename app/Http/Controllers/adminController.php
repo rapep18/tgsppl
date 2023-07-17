@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class donatur extends Controller
+class adminController extends Controller
 {
     public function index(): Response
     {
@@ -34,4 +34,5 @@ class donatur extends Controller
     {
     dd('store');
     }
+
 }
