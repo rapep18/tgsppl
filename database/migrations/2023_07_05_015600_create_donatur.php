@@ -15,14 +15,20 @@ class CreateDonationsTable extends Migration
     {
         Schema::create('donatur', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('donor_name')->nullable();
-            $table->string('donor_email')->nullable();
-            $table->string('donation_type')->nullable();
-            $table->decimal('amount', 20, 2)->default(0);
-            $table->string('note')->nullable();
-            $table->string('status')->default('pending');
-            $table->string('snap_token')->nullable();
+            $table->bigInteger('id_user');
+            $table->string('nama');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->string('alamat');
+            $table->string('noTelp');
+            $table->enum('JK_donatur', ['Laki-laki', 'Perempuan'])->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('donatur', function($table) {
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

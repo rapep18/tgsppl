@@ -13,8 +13,20 @@ return new class extends Migration
     {
         Schema::create('admin', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('id_user');
+            $table->string('nama');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->string('alamat');
+            $table->string('noTelp');
             $table->timestamps();
         });
+        
+        Schema::table('admin', function($table) {
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+        });       
     }
 
     /**

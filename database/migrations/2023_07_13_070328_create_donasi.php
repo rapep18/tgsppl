@@ -11,25 +11,27 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('riwayat_pencairan_dana', function (Blueprint $table) {
+        Schema::create('donasi', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('id_user');
-            $table->date('tglPencairan_dana');
-            $table->float('total_dana');  
+            $table->string('metode_donasi');
+            $table->date('tgl_donasi');
+            $table->float('nominal_donasi');  
             $table->timestamps();
         });
-        Schema::table('riwayat_pencairan_dana', function($table) {
+
+        Schema::table('donasi', function($table) {
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_yayasan_panti_asuhan')->references('id')->on('yayasan_panti_asuhan')->onDelete('set null');
-            $table->foreign('id_admin')->references('id')->on('admin')->onDelete('set null');
+            $table->foreign('id_donatur')->references('id')->on('donatur')->onDelete('set null');
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('riwayat_pencairan_dana');
+        Schema::dropIfExists('donasi');
     }
 };
